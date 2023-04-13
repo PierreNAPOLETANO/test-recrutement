@@ -1,14 +1,16 @@
 const articleList = []; // In a real app this list would be full of articles.
 var kudos = 5;
 
+
+/**
+ * J'ai décidé d'utiliser la méthode reduce car cela me permet 
+ * d'optimiser le code et de passer de 7 lignes à 3 lignes 
+ * 
+ * La méthode reduce me permet d'accumuler de toutes les valeurs
+ * contenu dans un tableau
+ */
 function calculateTotalKudos(articles) {
-  var kudos = 0;
-  
-  for (let article of articles) {
-    kudos += article.kudos;
-  }
-  
-  return kudos;
+  return articles.reduce((total, article) => total + article.kudos, 0);
 }
 
 document.write(`

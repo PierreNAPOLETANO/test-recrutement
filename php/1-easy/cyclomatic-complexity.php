@@ -1,59 +1,28 @@
 <?php
 
+/**
+ * J'ai décidé dans un 1er temps de créer un tableau contenant tout les unités de stockage
+ * 
+ * J'ai créé une variable $factor qui est le nombre de bytes dans une unité de stockage supérieure
+ * et qui va être utile si on besoin de la modifier et éviter de la modifier à plusieurs endroits
+ * 
+ * J'ai préférer utiliser un boucle while me permettant d'itérer sur le tableau des unités de stockage
+ * et de pouvoir effectué des actions tant que ma condition est vrai en plus de mon itération sur le tableau
+ * 
+ * Pour finir je retourne le calcul obtenu dans ma boucle
+ */
 function convertSize($bytes, $precision = 2) {
-  $kilobytes = $bytes / 1024;
-
-  if ($kilobytes < 1024) {
-    return round($bytes, $precision) . ' KB';
-  }
-
-  $megabytes = $kilobytes / 1024;
-
-  if ($megabytes < 1024) {
-    return round($megabytes, $precision) . ' MB';
-  }
-
-  $gigabytes = $megabytes / 1024;
-
-  if ($gigabytes < 1024) {
-    return round($gigabytes, $precision) . ' GB';
-  }
-
-  $terabytes = $gigabytes / 1024;
-
-  if ($terabytes < 1024) {
-    return round($terabytes, $precision) . ' TB';
-  }
-
-  $petabytes = $terabytes / 1024;
-
-  if ($petabytes < 1024) {
-    return round($petabytes, $precision) . ' TB';
-  }
-
-  $exabytes = $petabytes / 1024;
-
-  if ($exabytes < 1024) {
-    return round($exabytes, $precision) . ' EB';
-  }
-
-  $zettabytes = $exabytes / 1024;
-
-  if ($zettabytes < 1024) {
-    return round($zettabytes, $precision) . ' ZB';
-  }
-
-  $yottabytes = $zettabytes / 1024;
-
-  if ($yottabytes < 1024) {
-    return round($yottabytes, $precision) . ' ZB';
-  }
-
-  $hellabyte = $yottabytes / 1024;
-
-  if ($hellabyte < 1024) {
-    return round($hellabyte, $precision) . ' HB';
-  }
+  $sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB', 'HB'];
+  $factor = 1024;
+  $i = 0;
   
-  return $bytes . ' B';
+  while ($bytes >= $factor && $i < count($sizes) - 1) {
+    $bytes /= $factor;
+    $i++;
+  }
+
+  return round($bytes, $precision) . ' ' . $sizes[$i];
 }
+
+echo "\n";
+echo convertSize2(50000);

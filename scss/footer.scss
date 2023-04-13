@@ -1,25 +1,58 @@
 /* Footer */
+
+
+/*
+  Ce que j'ai fait:
+    - J'ai regarder et mis en commun les différentes propriéts (S)CSS communes aux
+      différentes classes présentes dans le fichier
+
+    - J'ai utilisé une mixin permettant de changé la couleur des text-shadow pour les classes
+      form__footer, cgv__footer, cgu__footer et l'id footer
+
+    - J'ai mis les différentes classes entre les {} de l'id footer car cela permet d'eviter les 
+      répétition de l'id #footer, cela donne également une certaine lisibilité au code et en SCSS
+      ont à la possibilité d'ajouter les id / class dans les accolades du parent
+
+
+  Propriété communes:
+    text-shadow: 0.55rem 0.55rem #15FFF5;
+      .form__footer
+      .cgv__footer
+      .cgu__footer
+
+    margin: 1rem;
+      .form__footer
+      .button
+
+    margin: 0.5rem;
+      .cgv__footer
+      .cgu__footer
+ 
+*/
+
+@mixin textShadow($color) {
+  text-shadow: 0.55rem 0.55rem $color;
+}
+
 #footer {
-  text-shadow: 0.55rem 0.55rem #FFFFFF;
-}
+  @include textShadow(#FFFFFF);
 
-#footer .form__footer {
-  margin: 1rem;
-  text-shadow: 0.55rem 0.55rem #15FFF5;
-}
+  .form__footer, .cgv__footer, .cgu__footer {
+    @include textShadow(#15FFF5);
+  }
 
-#footer .cgv__footer {
-  margin: 0.5rem;
-  text-shadow: 0.55rem 0.55rem #15FFF5;
-}
+  .form__footer, .button {
+    margin: 1rem;
+  }
 
-#footer .cgv__footer .button {
-  margin: 1rem;
-  padding: 1rem;
-  font-size: 1.5rem;
-}
+  .cgv__footer, .cgu__footer {
+    margin: 0.5rem;
+  }
 
-#footer .cgu__footer {
-  margin: 0.5rem;
-  text-shadow: 0.55rem 0.55rem #15FFF5;
+  .cgv__footer {
+    .button {
+      padding: 1rem;
+      font-size: 1.5rem;
+    }
+  }
 }
